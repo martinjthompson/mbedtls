@@ -73,12 +73,13 @@ string(REGEX MATCH "IAR" CMAKE_COMPILER_IS_IAR "${CMAKE_C_COMPILER_ID}")
 string(REGEX MATCH "MSVC" CMAKE_COMPILER_IS_MSVC "${CMAKE_C_COMPILER_ID}")
 
 # the test suites currently have compile errors with MSVC
-if(CMAKE_COMPILER_IS_MSVC)
+if(NOT DEFINED ENABLE_TESTING)
+  if(CMAKE_COMPILER_IS_MSVC)
     option(ENABLE_TESTING "Build Mbed TLS tests." OFF)
-else()
+  else()
     option(ENABLE_TESTING "Build Mbed TLS tests." ON)
+  endif()
 endif()
-
 # Warning string - created as a list for compatibility with CMake 2.8
 set(CTR_DRBG_128_BIT_KEY_WARN_L1 "****  WARNING!  MBEDTLS_CTR_DRBG_USE_128_BIT_KEY defined!\n")
 set(CTR_DRBG_128_BIT_KEY_WARN_L2 "****  Using 128-bit keys for CTR_DRBG limits the security of generated\n")
