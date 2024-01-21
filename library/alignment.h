@@ -51,6 +51,10 @@
  * \param   p pointer to 2 bytes of data
  * \return  Data at the given address
  */
+// MJT this is a complete bodge
+#ifdef __TASKING__
+#define inline static inline
+#endif
 inline uint16_t mbedtls_get_unaligned_uint16(const void *p)
 {
     uint16_t r;
@@ -192,6 +196,11 @@ inline void mbedtls_put_unaligned_uint64(void *p, uint64_t x)
  * compiler may be able to detect and transform into the relevant bswap or
  * similar instruction.
  */
+// MJT bodge
+#ifdef __TASKING__
+#undef inline
+#endif
+
 #if !defined(MBEDTLS_BSWAP16)
 static inline uint16_t mbedtls_bswap16(uint16_t x)
 {
@@ -229,6 +238,10 @@ static inline uint64_t mbedtls_bswap64(uint64_t x)
 }
 #define MBEDTLS_BSWAP64 mbedtls_bswap64
 #endif /* !defined(MBEDTLS_BSWAP64) */
+// MJT Bodge
+#ifdef __TASKING__
+#define inline static inline
+#endif
 
 #if !defined(__BYTE_ORDER__)
 static const uint16_t mbedtls_byte_order_detector = { 0x100 };
@@ -517,5 +530,9 @@ static const uint16_t mbedtls_byte_order_detector = { 0x100 };
             mbedtls_put_unaligned_uint64((data) + (offset), (uint64_t) (n));     \
         }                                                                        \
     }
+// MJT Bodge
+#ifdef __TASKING__
+#undef inline
+#endif
 
 #endif /* MBEDTLS_LIBRARY_ALIGNMENT_H */

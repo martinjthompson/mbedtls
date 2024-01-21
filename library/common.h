@@ -177,6 +177,11 @@ static inline const unsigned char *mbedtls_buffer_offset_const(
  * \param   b Pointer to input (buffer of at least \p n bytes)
  * \param   n Number of bytes to process.
  */
+// MJT Bodge
+#ifdef __TASKING__
+#define inline static inline
+#endif
+
 inline void mbedtls_xor(unsigned char *r, const unsigned char *a, const unsigned char *b, size_t n)
 {
     size_t i = 0;
@@ -205,6 +210,10 @@ inline void mbedtls_xor(unsigned char *r, const unsigned char *a, const unsigned
         r[i] = a[i] ^ b[i];
     }
 }
+// MJT Bodge
+#ifdef __TASKING__
+#undef inline
+#endif
 
 /**
  * Perform a fast block XOR operation, such that
