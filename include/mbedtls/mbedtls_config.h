@@ -1,3 +1,4 @@
+#error "Should not be using this include file - should be using -DMBEDTLS_CONFIG_FILE"
 /**
  * \file mbedtls_config.h
  *

@@ -12,9 +12,9 @@
 #include "psa/crypto.h"
 #include <stddef.h>
 #include <string.h>
-#include "psa_crypto_driver_wrappers_no_static.h"
 
 #if defined(MBEDTLS_PSA_P256M_DRIVER_ENABLED)
+#include "psa_crypto_driver_wrappers_no_static.h"
 
 /* INFORMATION ON PSA KEY EXPORT FORMATS:
  *
